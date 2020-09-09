@@ -11,7 +11,7 @@ $sizeinfo = @{}
 foreach ($i in $subDirectories.fullName)
 	{
     $size=((robocopy.exe $i c:\fakepathduh /L /XJ /R:0 /W:1 /NP /E /BYTES /NFL /NDL /NJH /MT:64)[-4] -replace '\D+(\d+).*','$1') / 1MB -as [int]
-    $sizeinfo.Add($i, $size)
+    $sizeinfo.Add($i.Replace("\","/"), $size)
    
 }
 
