@@ -18,7 +18,7 @@ foreach ($i in $subDirectories.fullName)
 $topvalues = ($sizeinfo.GetEnumerator() | Sort-Object -Property Value -Descending | select -first $topcount)
 $topvalues | select Name,Value | Export-Csv $csvpath
 foreach($value in $topvalues){
-    $data += [PSCustomObject]@{"#DIR" = $value.name}
+    $data += [PSCustomObject]@{"{#DIR}" = $value.name}
 }
 $json = [PSCustomObject]@{"data" = $data}
 $json | convertto-json
