@@ -16,7 +16,11 @@ foreach ($i in $subDirectories.fullName)
 
 $topvalues = ($sizeinfo.GetEnumerator() | Sort-Object -Property Value -Descending | select -first $topcount)
 foreach($value in $topvalues){
+    if($value.value -eq ""){
+        $value.value = -1000
+    }
     $data += [PSCustomObject]@{"{#DIR}" = $value.name}
+        
     #remove out-null and add -vv for debugging if your not seeing items populate
     C:\zabbix\bin\zabbix_sender.exe -c "C:\zabbix\conf\zabbix_agentd.conf" -s $ENV:computername -k "folder.size[$($value.name)]" -o $value.value | out-null
 
